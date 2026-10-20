@@ -11,7 +11,7 @@ public class WarGame {
     public WarGame() {
         PlayingCardDeck deck = new PlayingCardDeck();
 
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 26 && !deck.isEmpty(); i++) {
             p1.add(deck.nextCard());
             p2.add(deck.nextCard());
         }
@@ -19,6 +19,9 @@ public class WarGame {
 
     public void play() {
         int rounds = 0;
+
+        System.out.println("Starting the game of WAR!");
+        System.out.println("-------------------------------------------");
 
         while (!p1.isEmpty() && !p2.isEmpty()) {
             rounds++;
@@ -45,7 +48,7 @@ public class WarGame {
 
             System.out.println("Player 1 cards: " + p1.size());
             System.out.println("Player 2 cards: " + p2.size());
-            System.out.println("---------------------------");
+            System.out.println("-------------------------------------------");
         }
 
         if (p1.isEmpty() && p2.isEmpty()) {
@@ -66,6 +69,7 @@ public class WarGame {
 
             if (p1.size() < 4 || p2.size() < 4) {
                 System.out.println("A player cannot continue the war.");
+
                 if (p1.size() < 4 && p2.size() < 4) {
                     p1.clear();
                     p2.clear();
