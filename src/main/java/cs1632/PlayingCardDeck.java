@@ -5,31 +5,38 @@ import java.util.Random;
 
 public class PlayingCardDeck {
     private LinkedList<PlayingCard> cardDeck;
+
     public void newShuffle() {
-        PlayingCard [] cards = new PlayingCard[PlayingCard.CardValues.length * PlayingCard.SuitValues.length];
+        cardDeck = new LinkedList<>();
+
+        PlayingCard[] cards = new PlayingCard[
+                PlayingCard.CardValues.length * PlayingCard.SuitValues.length
+                ];
+
         int cn = 0;
         for (int cv = 0; cv < PlayingCard.CardValues.length; cv++) {
             for (int sv = 0; sv < PlayingCard.SuitValues.length; sv++) {
-                cards[cn] = new PlayingCard(cv,sv);
+                cards[cn] = new PlayingCard(cv, sv);
                 cn++;
             }
         }
+
         Random rand = new Random();
-        for (int i = PlayingCard.CardValues.length * PlayingCard.SuitValues.length; i >= 1; i--) {
+        for (int i = cards.length; i >= 1; i--) {
             int rn = rand.nextInt(i);
             cardDeck.add(cards[rn]);
-            cards[rn] = cards[i-1];
+            cards[rn] = cards[i - 1];
         }
     }
+
     public PlayingCardDeck() {
-        cardDeck = new LinkedList<>();
         newShuffle();
     }
+
     public PlayingCard nextCard() {
-        PlayingCard c = cardDeck.peek();
-        cardDeck.pop();
-        return c;
+        return cardDeck.poll();
     }
+
     public Boolean isEmpty() {
         return cardDeck.isEmpty();
     }
